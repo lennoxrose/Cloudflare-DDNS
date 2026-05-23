@@ -1,0 +1,43 @@
+[Unit]
+Description=Cloudflare DDNS Updater
+Documentation=https://github.com/lennoxrose/cloudflare-ddns
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=10s
+
+# User/Group (adjust if needed)
+User=cloudflare-ddns
+Group=cloudflare-ddns
+
+# Working directory
+WorkingDirectory=/opt/cloudflare-ddns
+
+# Environment
+# Option A: inline (less secure, visible in `systemctl show`)
+# Environment=CF_API_TOKEN=your_token_here
+# Environment=CF_ZONE_ID=your_zone_id_here
+# Environment=CHECK_INTERVAL_SECONDS=300
+
+# Option B: env file (recommended — readable only by root + the service user)
+EnvironmentFile=/etc/cloudflare-ddns/env
+
+# Run the compiled app
+ExecStart=/usr/bin/node /opt/cloudflare-ddns/dist/index.js
+
+# State directory (maps to /var/lib/cloudflare-ddns)
+StateDirectory=cloudflare-ddns
+Environment=STATE_FILE_PATH=/var/lib/cloudflare-ddns/ddns-state.json
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/cloudflare-ddns
+
+[Install]
+WantedBy=multi-user.target

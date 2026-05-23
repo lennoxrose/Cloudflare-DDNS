@@ -1,0 +1,25 @@
+services:
+  cloudflare-ddns:
+    build: .
+    container_name: cloudflare-ddns
+    restart: unless-stopped
+
+    environment:
+      # Required - your Cloudflare API token (DNS:Edit permission for the zone)
+      CF_API_TOKEN: ${CF_API_TOKEN}
+
+      # Required - your Cloudflare Zone ID (found on the zone Overview page)
+      CF_ZONE_ID: ${CF_ZONE_ID}
+
+      # Optional - how often to check for IP changes (default: 300 seconds)
+      CHECK_INTERVAL_SECONDS: ${CHECK_INTERVAL_SECONDS:-300}
+
+    volumes:
+      # Persists the tracked-IP state across container restarts
+      - ddns_data:/data
+
+    # No ports needed this is a background worker
+    network_mode: "host"   # uses host network so IP detection is accurate
+
+volumes:
+  ddns_data:

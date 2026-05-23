@@ -1,0 +1,19 @@
+{
+  "name": "cloudflare-ddns",
+  "version": "1.0.0",
+  "description": "Cloudflare DDNS updater — tracks your public IPv4 and syncs all matching A records",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts"
+  },
+  "dependencies": {
+    "cloudflare": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.0"
+  }
+}
