@@ -1,8 +1,14 @@
+<div align="center">
+
 # Cloudflare DDNS
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Docker](https://img.shields.io/badge/Docker-ready-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Cloudflare](https://img.shields.io/badge/Cloudflare-DNS-F38020?logo=cloudflare&logoColor=white)](https://www.cloudflare.com/)
+
+</div>
+
+---
 
 Automatically keeps your Cloudflare DNS A records in sync with your public IPv4 address. On first run it discovers every A record in your zone that matches your current IP and tracks them — when your IP changes, all of them are updated in one pass.
 
